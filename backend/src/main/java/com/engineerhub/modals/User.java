@@ -8,6 +8,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -74,6 +76,59 @@ public class User {
     @PreUpdate // run before the entity is updated (updated in the database)
     public void preUpdate() {
         updatedAt = LocalDateTime.now();
+    }
+    // ---------------- RELATIONSHIPS ----------------
+
+   public List<Message> getSentMessages() {
+        return sentMessages;
+    }
+
+    public void setSentMessages(List<Message> sentMessages) {
+        this.sentMessages = sentMessages;
+    }
+
+    public List<Message> getReceivedMessages() {
+        return receivedMessages;
+    }
+
+    public void setReceivedMessages(List<Message> receivedMessages) {
+        this.receivedMessages = receivedMessages;
+    }
+  //messaging relationshps
+   @OneToMany(mappedBy = "sender")
+    private List<Message> sentMessages = new ArrayList<>();
+
+    @OneToMany(mappedBy = "receiver")
+    private List<Message> receivedMessages = new ArrayList<>();
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
+    }
+    //relationship with products
+    @OneToMany(mappedBy = "seller",
+           cascade = CascadeType.ALL,
+           orphanRemoval = true)
+     private List<Product> products = new ArrayList<>();
+    
+     //relationship with notifications
+     @OneToMany(
+        mappedBy = "user",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<Notification> notifications = new ArrayList<>();
+
+
+    
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public Long getId() {

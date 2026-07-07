@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -31,6 +33,20 @@ public class Category {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+     // ---------------- RELATIONSHIPS ----------------
+    @OneToMany(mappedBy = "category",
+           cascade = CascadeType.ALL)
+     private List<Product> products = new ArrayList<>();
+
+
+     
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
     public Category() {
     }

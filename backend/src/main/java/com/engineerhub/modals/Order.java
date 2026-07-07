@@ -47,8 +47,25 @@ public class Order {
             orphanRemoval = true
     )
     private List<OrderItem> orderItems = new ArrayList<>();
+     
+
+    @OneToOne(
+        mappedBy = "order",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private Payment payment;
+
 
     public Order() {
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     @PrePersist
@@ -61,7 +78,7 @@ public class Order {
     public void preUpdate() {
         updatedAt = LocalDateTime.now();
     }
-
+  
     // Getters
 
     public Long getId() {
