@@ -9,11 +9,16 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -154,15 +159,15 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
+     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
-
+   
     public String getEmail() {
         return email;
     }
@@ -174,6 +179,7 @@ public class User {
     /**
      * Store only BCrypt encoded passwords.
      */
+    @Override
     public String getPassword() {
         return password;
     }
@@ -181,6 +187,7 @@ public class User {
     /**
      * Store only BCrypt encoded passwords.
      */
+    
     public void setPassword(String password) {
         this.password = password;
     }
@@ -232,4 +239,15 @@ public class User {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
+
+   @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+
+        return List.of(
+                new SimpleGrantedAuthority(role.name())
+        );
+
+    }
+
+    //end
 }
