@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.engineerhub.modals.enums.Role;
 import com.engineerhub.modals.User;
@@ -17,13 +18,13 @@ public class AuthService {
 
     private final JwtService jwtService;
     private final UserRepository userRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final PasswordEncoder  passwordEncoder;
     private final AuthenticationManager authenticationManager;
     
 
 
     public AuthService(UserRepository userRepository,
-                    BCryptPasswordEncoder passwordEncoder,
+                    PasswordEncoder  passwordEncoder,
                     AuthenticationManager authenticationManager,
                     JwtService jwtService) {
 

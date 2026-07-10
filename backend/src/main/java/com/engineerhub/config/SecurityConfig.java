@@ -39,7 +39,8 @@ public class SecurityConfig {
             throws Exception {
 
         http
-
+                //handle cors error
+                .cors(cors -> {})
                 // Disable CSRF
                 .csrf(csrf -> csrf.disable())
 
