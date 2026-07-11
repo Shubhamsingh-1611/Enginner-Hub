@@ -27,7 +27,7 @@ public class RegisterRequest {
     private String password;
 
     @NotBlank(message = "Phone number is required")
-    private String phoneNumber;
+    private String phone;
 
     public RegisterRequest() {
     }
@@ -73,11 +73,11 @@ public class RegisterRequest {
         this.password = password;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

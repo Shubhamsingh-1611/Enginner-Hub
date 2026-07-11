@@ -50,7 +50,7 @@ public class AuthService {
         user.setLastName(request.getLastName());
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
-        user.setPhone(request.getPhoneNumber());
+        user.setPhone(request.getPhone());
 
         // Encrypt password
         user.setPassword(passwordEncoder.encode(request.getPassword()));

@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import API from "../api/authApi.js"
 
 export default function Register() {
 
+  const navigate = useNavigate();
 
 
   const [formData, setFormData] = useState({ firstName: "", lastName: "", username: "", email: "", phone: "", password: "" });
@@ -21,7 +22,8 @@ export default function Register() {
         );
    console.log("send data");
         alert(response.data);
-
+        navigate("/login");
+         
     } catch (error) {
 
         console.log(error);
@@ -74,12 +76,12 @@ export default function Register() {
 
               <input
                 placeholder="First Name"
-
+               
               value={formData.firstName}
               onChange={(e) =>
               setFormData((prev) => ({
                 ...prev,
-                [e.target.name]: e.target.value,
+                firstName: e.target.value,
               }))
               }
 
@@ -92,7 +94,7 @@ export default function Register() {
               onChange={(e) =>
               setFormData((prev) => ({
                 ...prev,
-                [e.target.name]: e.target.value,
+                lastName: e.target.value,
               }))
               }
                 className="border border-gray-300 rounded-xl px-4 py-3 focus:border-[#F4D00A] focus:ring-4 focus:ring-[#FFEE8C] outline-none"
@@ -106,7 +108,7 @@ export default function Register() {
               onChange={(e) =>
               setFormData((prev) => ({
                 ...prev,
-                [e.target.name]: e.target.value,
+                username: e.target.value,
               }))
               }
               className="border border-gray-300 rounded-xl px-4 py-3 focus:border-[#F4D00A] focus:ring-4 focus:ring-[#FFEE8C] outline-none"
@@ -118,7 +120,7 @@ export default function Register() {
               onChange={(e) =>
               setFormData((prev) => ({
                 ...prev,
-                [e.target.name]: e.target.value,
+                email: e.target.value,
               }))
               }
               placeholder="Email"
@@ -130,7 +132,7 @@ export default function Register() {
               onChange={(e) =>
               setFormData((prev) => ({
                 ...prev,
-                [e.target.name]: e.target.value,
+                phone: e.target.value,
               }))
               }
               placeholder="Phone"
@@ -143,7 +145,7 @@ export default function Register() {
               onChange={(e) =>
               setFormData((prev) => ({
                 ...prev,
-                [e.target.name]: e.target.value,
+                password: e.target.value,
               }))
               }
               placeholder="Password"

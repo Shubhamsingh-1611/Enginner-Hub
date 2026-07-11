@@ -22,9 +22,10 @@ const handleSubmit = async (e) => {
             "/auth/login",
             formData
         );
-   console.log("send data");
-
-        alert(response.data);
+       const {token,message} = response.data;;
+       localStorage.setItem("token", token);
+       console.log(response);
+        alert(response.data.message);
 
     } catch (error) {
 

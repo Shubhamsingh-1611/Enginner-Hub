@@ -19,11 +19,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @GetMapping("/register")
-    public String test() {
-        return "AuthController is working!";
-    }
-
+    
     @PostMapping("/register")
     public String register(@Valid @RequestBody RegisterRequest request) {
         return authService.register(request);
